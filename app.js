@@ -10,10 +10,8 @@ const helmet = require("helmet");
 const app = express();
 
 require('dotenv').config();
-const user = process.env.DB_USER;
-const pass = process.env.DB_PASS;
 // mongoose connect
-mongoose.connect(`mongodb+srv://${user}:${pass}@sandbox.kcodm.mongodb.net/db_piquante?retryWrites=true&w=majority`,
+mongoose.connect('mongodb+srv://KING:BAHmamadou@cluster0.mszdlnx.mongodb.net/?retryWrites=true&w=majority',
     { useNewUrlParser: true,
      useUnifiedTopology: true 
     })
