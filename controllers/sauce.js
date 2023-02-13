@@ -8,7 +8,7 @@ exports.createSauce = (req, res, next) => {
     delete sauceObject._id;    
     const sauce = new Sauce({ // un nouvel objet sauce est crée avec le model Sauce
         ...sauceObject,
-        imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,   // l'url de l'image enregistrée dans le dossier images du serveur est aussi stockée dans la bdd      
+        imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,   // l'url de l'images enregistrée dans le dossier images du serveur est aussi stockée dans la bdd      
     });
     sauce.save() // la sauce est sauvegardée dans la bdd
     .then( () => res.status(201).json({ message: 'Sauce saved'}))
@@ -18,7 +18,7 @@ exports.createSauce = (req, res, next) => {
 };
 
 exports.modifySauce = (req, res, next) => {
-    const sauceObject = req.file ? // on vérifie si la modification concerne le body ou un nouveau fichier image
+    const sauceObject = req.file ? // on vérifie si la modification concerne le body ou un nouveau fichier images
     {
         ...JSON.parse(req.body.sauce),
         imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
@@ -31,7 +31,7 @@ exports.modifySauce = (req, res, next) => {
 exports.deleteSauce = (req, res, next) => {
     Sauce.findOne({_id: req.params.id}) // on identifie la sauce
     .then(sauce => {
-    const filename = sauce.imageUrl.split('/images/')[1]; // on récupère l'adresse de l'image
+    const filename = sauce.imageUrl.split('/images/')[1]; // on récupère l'adresse de l'images
     fs.unlink(`images/${filename}`, () => { /// on la supprime du serveur
     Sauce.deleteOne({_id: req.params.id}) // on supprime la sauce de la bdd
     .then(()=> res.status(200).json({ message: 'Sauce deleted'}))
@@ -80,3 +80,4 @@ exports.getOneSauce = (req, res, next) => {  // on récupère une seule sauce
     .then( sauce => res.status(200).json(sauce))
     .catch( error => res.status(404).json({ error }))
 };
+
