@@ -26,14 +26,16 @@ app.use((req, res, next) => {
 });
 
 
+
 app.use(bodyParser.json()); //bodyparser
 
 app.use(mongoSanitize()); // mongo-sanitize to prevent operator injection
-app.use(helmet()); // helmet
+app.use(helmet({
+    crossOriginResourcePolicy: { policy: "same-site" },
+  })); // helmet
 
 app.use('/images', express.static(path.join(__dirname, 'images')));
 app.use('/api/sauces', saucesRoutes);
 app.use('/api/auth', userRoutes);
-app.use(express.static('images'))
 
 module.exports = app; // export de l'appli
