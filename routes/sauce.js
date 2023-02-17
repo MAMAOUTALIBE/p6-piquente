@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const sauceCtrl = require('../controllers/sauce');
-//const Sauce = require('../models/Sauce');
+const Sauce = require('../models/Sauce');
 const auth = require('../middleware/auth'); // middleware qui permet d'authentifier les pages de l'application
 const multer = require('../middleware/multer-config'); // middleware qui définit la destination et le nom de fichier des images
 
